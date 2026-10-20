@@ -1,0 +1,157 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Data Table</title>
+    <link rel="stylesheet" href="css/Stylesheet.css">
+
+    <style>
+        .search-box {
+            width: 100%;
+            max-width: 400px;
+            padding: 10px;
+            margin: 10px 0 15px;
+        }
+
+        .table-wrap {
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="site-header">
+        <a class="logo" href="index.html">Studio</a>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="components.html">Components</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <h1>People Data</h1>
+
+        <label for="search">Search:</label>
+        <input
+            class="search-box"
+            type="text"
+            id="search"
+            placeholder="Search by name, age or city"
+        >
+
+        <div>
+            <button class="btn" id="sortName" type="button">
+                Sort by Name
+            </button>
+
+            <button class="btn" id="sortAge" type="button">
+                Sort by Age
+            </button>
+        </div>
+
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>City</th>
+                    </tr>
+                </thead>
+
+                <tbody id="tableBody"></tbody>
+            </table>
+        </div>
+    </main>
+
+    <script>
+    
+        let people = [
+            { name: "Ahmed", age: 22, city: "Cairo" },
+            { name: "Mona", age: 20, city: "Giza" },
+            { name: "Omar", age: 25, city: "Alexandria" },
+            { name: "Sara", age: 19, city: "Cairo" },
+            { name: "Ali", age: 30, city: "Giza" }
+        ];
+
+        let searchInput = document.getElementById("search");
+        let tableBody = document.getElementById("tableBody");
+
+        let sortBy = "";
+        let ascending = true;
+
+    
+        function showData() {
+            let searchText = searchInput.value.toLowerCase();
+
+            let result = people.filter(function(person) {
+                return person.name.toLowerCase().includes(searchText) ||
+                       person.city.toLowerCase().includes(searchText) ||
+                       person.age.toString().includes(searchText);
+            });
+
+            
+            if (sortBy === "name") {
+                result.sort(function(a, b) {
+                    return a.name.localeCompare(b.name) * (ascending ? 1 : -1);
+                });
+            }
+
+            if (sortBy === "age") {
+                result.sort(function(a, b) {
+                    return (a.age - b.age) * (ascending ? 1 : -1);
+                });
+            }
+
+        
+            tableBody.innerHTML = "";
+
+        
+            result.forEach(function(person) {
+                let row = document.createElement("tr");
+
+                row.innerHTML =
+                    "<td>" + person.name + "</td>" +
+                    "<td>" + person.age + "</td>" +
+                    "<td>" + person.city + "</td>";
+
+                tableBody.appendChild(row);
+            });
+        }
+
+        
+        searchInput.addEventListener("input", showData);
+
+        
+        document.getElementById("sortName").addEventListener("click", function() {
+            if (sortBy === "name") {
+                ascending = !ascending;
+            } else {
+                sortBy = "name";
+                ascending = true;
+            }
+
+            showData();
+        });
+
+        
+        document.getElementById("sortAge").addEventListener("click", function() {
+            if (sortBy === "age") {
+                ascending = !ascending;
+            } else {
+                sortBy = "age";
+                ascending = true;
+            }
+
+            showData();
+        });
+
+        showData();
+    </script>
+
+</body>
+</html>

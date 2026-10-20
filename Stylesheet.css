@@ -1,0 +1,160 @@
+
+
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #222;
+    line-height: 1.6;
+}
+
+header {
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+nav a {
+    color: white;
+    margin: 0 8px;
+    text-decoration: none;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+.container {
+    width: 90%;
+    max-width: 1000px;
+    margin: 25px auto;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+}
+
+.card {
+    background-color: white;
+    padding: 18px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    margin-bottom: 15px;
+}
+
+.button,
+button {
+    display: inline-block;
+    background-color: #333;
+    color: white;
+    border: 0;
+    padding: 10px 15px;
+    margin-top: 8px;
+    border-radius: 4px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.button:hover,
+button:hover {
+    background-color: #555;
+}
+
+form {
+    max-width: 500px;
+}
+
+label {
+    display: block;
+    margin-top: 12px;
+}
+
+input,
+textarea,
+select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    font: inherit;
+}
+
+.notice {
+    background-color: #e4f1ff;
+    border-left: 4px solid #2673b8;
+    padding: 12px;
+}
+
+footer {
+    text-align: center;
+    padding: 12px;
+    background-color: #ddd;
+    margin-top: 30px;
+}
+
+/* Tablet */
+@media (min-width: 600px) {
+    .cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Desktop */
+@media (min-width: 900px) {
+    .cards {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Dark Mode */
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #181818;
+        color: #f1f1f1;
+    }
+
+    .card {
+        background-color: #252525;
+        border-color: #444;
+    }
+
+    header {
+        background-color: #101010;
+    }
+
+    .button,
+    button {
+        background-color: #555;
+    }
+
+    .button:hover,
+    button:hover {
+        background-color: #777;
+    }
+
+    input,
+    textarea,
+    select {
+        background-color: #252525;
+        color: #f1f1f1;
+        border-color: #666;
+    }
+
+    .notice {
+        background-color: #1d3040;
+        border-left-color: #70b7ff;
+    }
+
+    footer {
+        background-color: #222;
+    }
+}

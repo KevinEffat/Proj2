@@ -1,0 +1,165 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Registration Form</title>
+    <link rel="stylesheet" href="css/Stylesheet.css">
+
+    <style>
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+        }
+
+        .error {
+            color: red;
+            font-size: 14px;
+        }
+
+        .success {
+            color: green;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="site-header">
+        <a class="logo" href="index.html">Studio</a>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="components.html">Components</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <h1>Registration Form</h1>
+
+        <form id="registerForm" novalidate>
+
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name">
+                <div class="error" id="nameError"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="text" id="email">
+                <div class="error" id="emailError"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password">
+                <div class="error" id="passwordError"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="confirmPassword">Confirm Password</label>
+                <input type="password" id="confirmPassword">
+                <div class="error" id="confirmError"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="age">Age</label>
+                <input type="number" id="age">
+                <div class="error" id="ageError"></div>
+            </div>
+
+            <button class="btn" type="submit">Register</button>
+
+            <p class="success" id="successMessage"></p>
+
+        </form>
+    </main>
+
+    <script>
+        let form = document.getElementById("registerForm");
+
+        form.addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            // Get the values
+            let name = document.getElementById("name").value.trim();
+            let email = document.getElementById("email").value.trim();
+            let password = document.getElementById("password").value;
+            let confirmPassword = document.getElementById("confirmPassword").value;
+            let age = document.getElementById("age").value;
+
+            // Clear old messages
+            document.getElementById("nameError").textContent = "";
+            document.getElementById("emailError").textContent = "";
+            document.getElementById("passwordError").textContent = "";
+            document.getElementById("confirmError").textContent = "";
+            document.getElementById("ageError").textContent = "";
+            document.getElementById("successMessage").textContent = "";
+
+            let valid = true;
+
+            // Check name
+            if (name === "") {
+                document.getElementById("nameError").textContent =
+                    "Name is required.";
+                valid = false;
+            }
+
+            // Check email
+            if (email === "") {
+                document.getElementById("emailError").textContent =
+                    "Email is required.";
+                valid = false;
+            } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                document.getElementById("emailError").textContent =
+                    "Enter a valid email.";
+                valid = false;
+            }
+
+            // Check password
+            if (password.length < 8) {
+                document.getElementById("passwordError").textContent =
+                    "Password must be at least 8 characters.";
+                valid = false;
+            }
+
+            // Check confirm password
+            if (confirmPassword === "") {
+                document.getElementById("confirmError").textContent =
+                    "Please confirm your password.";
+                valid = false;
+            } else if (password !== confirmPassword) {
+                document.getElementById("confirmError").textContent =
+                    "Passwords do not match.";
+                valid = false;
+            }
+
+            // Check age
+            if (age === "") {
+                document.getElementById("ageError").textContent =
+                    "Age is required.";
+                valid = false;
+            } else if (Number(age) < 1 || Number(age) > 120) {
+                document.getElementById("ageError").textContent =
+                    "Age must be between 1 and 120.";
+                valid = false;
+            }
+
+            // Show result
+            if (valid) {
+                document.getElementById("successMessage").textContent =
+                    "Registration form is valid!";
+            }
+        });
+    </script>
+
+</body>
+</html>
